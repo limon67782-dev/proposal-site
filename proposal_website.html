@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffe4ef">
+<title>একটু ভালোবাসা? 💗</title>
+<style>
+:root{--pink:#ff4f91;--deep:#c9185b;--light:#fff0f6;--ink:#5b2940;--card:rgba(255,255,255,.82)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;color:var(--ink);background:linear-gradient(135deg,#fff0f6,#ffe0ec 45%,#fff7fb);overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:38px 18px;position:relative;isolation:isolate}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);z-index:-1}
+.hero:before{width:240px;height:240px;background:#ffc2d8;top:5%;left:-90px;opacity:.65}
+.hero:after{width:280px;height:280px;background:#f7b5d0;right:-130px;bottom:3%;opacity:.55}
+.hero-card{width:min(100%,680px);padding:clamp(24px,6vw,52px) 22px;background:var(--card);border:1px solid #fff;border-radius:30px;box-shadow:0 20px 60px #c9185b18;backdrop-filter:blur(10px)}
+.kicker{letter-spacing:.12em;font-size:.8rem;color:var(--deep);font-weight:800}
+h1{font-size:clamp(2rem,8vw,4.2rem);line-height:1.2;margin:12px 0;color:var(--deep)}
+.subtitle{font-size:clamp(1rem,3.6vw,1.2rem);line-height:1.8;max-width:500px;margin:0 auto 24px}
+.big-heart{font-size:clamp(4rem,16vw,7rem);display:block;animation:beat 1.2s infinite;filter:drop-shadow(0 8px 12px #ff4f9140)}
+@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.12)}28%{transform:scale(1)}42%{transform:scale(1.08)}}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px}
+.btn{border:0;border-radius:999px;padding:13px 23px;font-weight:800;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.primary{background:linear-gradient(135deg,#ff6fa7,#e72f79);color:white;box-shadow:0 8px 20px #e72f7933}
+.secondary{background:#fff;color:var(--deep);border:1px solid #ffc1d8}
+main{width:min(100% - 28px,900px);margin:0 auto 50px}
+.section{background:var(--card);border:1px solid white;border-radius:24px;padding:clamp(20px,5vw,34px);margin:20px 0;box-shadow:0 12px 35px #a61c4a0b}
+h2{font-size:clamp(1.4rem,5vw,2rem);color:var(--deep);margin:0 0 14px}
+.section p{line-height:1.9}
+.letter{white-space:pre-line;background:#fff7fb;border:1px dashed #ff9fc2;border-radius:18px;padding:20px;line-height:2}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.photo{aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#ffd6e5,#fff);display:flex;align-items:center;justify-content:center;position:relative;border:1px solid #ffd0e1}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo span{padding:12px;text-align:center;color:#a23b65}
+.photo input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0}
+.timebox{background:#fff0f6;border:1px solid #ffd0e1;border-radius:15px;text-align:center;padding:14px 4px}
+.timebox strong{display:block;font-size:clamp(1.35rem,5vw,2rem);color:var(--deep)}
+.timebox small{font-size:.78rem}
+input[type="date"]{padding:12px;border:1px solid #f5aac7;border-radius:12px;background:white;color:var(--ink);max-width:100%}
+.secret{display:none;background:#fff3f8;padding:18px;border-radius:16px;border:1px dashed #f58db5;margin-top:14px;line-height:1.9}
+.secret.show{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.musicbar{position:fixed;right:14px;bottom:14px;z-index:5}
+.musicbar button{background:#fff;border:1px solid #ffc1d8;color:var(--deep);border-radius:999px;padding:11px 15px;box-shadow:0 6px 20px #a61c4a20;font-weight:800}
+.float-heart{position:fixed;bottom:-40px;z-index:0;pointer-events:none;animation:floatUp linear forwards;opacity:.7}
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+footer{text-align:center;padding:10px 18px 35px;color:#9d4b6b;font-size:.9rem}
+#response{font-weight:700;color:var(--deep);min-height:1.6em}
+@media(min-width:600px){.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}.photo:last-child:nth-child(odd){grid-column:auto}}
+@media(max-width:380px){.countdown{gap:5px}.timebox{padding:10px 2px}.btn{padding:12px 17px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-card">
+    <span class="kicker">একটা ছোট্ট প্রশ্ন… 💌</span>
+    <span class="big-heart" aria-hidden="true">💗</span>
+    <h1 id="headline">তুমি কি আমার হবে?</h1>
+    <p class="subtitle" id="intro">তোমার হাসিতে আমার দিনটা সুন্দর হয়ে যায়। আজ মনের ছোট্ট একটা কথা তোমাকে বলতে চাই…</p>
+    <div class="actions">
+      <button class="btn primary" id="yesBtn">হ্যাঁ, হবো! 💖</button>
+      <button class="btn secondary" id="noBtn">একটু ভাবি 🙈</button>
+    </div>
+    <p id="response" aria-live="polite"></p>
+    <button class="btn secondary" onclick="document.querySelector('#letterSection').scrollIntoView({behavior:'smooth'})">আমার চিঠিটা পড়ো 💌</button>
+  </div>
+</header>
+<main>
+  <section class="section" id="letterSection">
+    <h2>তোমার জন্য একটি চিঠি 💌</h2>
+    <div class="letter">প্রিয় তুমি,
+
+কীভাবে বললে মনের সব কথা ঠিকভাবে বোঝানো যায়, তা আমি জানি না। শুধু জানি, তোমার সঙ্গে কথা বললে মনটা ভালো হয়ে যায়, আর তোমার হাসি আমার কাছে ভীষণ মূল্যবান।
+
+আমি চাই, আমাদের গল্পটা হোক বিশ্বাস, সম্মান, বন্ধুত্ব আর অনেক সুন্দর স্মৃতিতে ভরা। কোনো তাড়াহুড়ো নেই—তোমার অনুভূতি আর সিদ্ধান্ত আমার কাছে গুরুত্বপূর্ণ।
+
+তোমার উত্তর যা-ই হোক, মন খুলে বলার জন্য ধন্যবাদ। 💗
+
+ইতি,
+তোমার শুভাকাঙ্ক্ষী 🌷</div>
+  </section>
+
+  <section class="section">
+    <h2>আমাদের ছোট্ট গ্যালারি 📸</h2>
+    <p>ছবির ঘরে ট্যাপ করে নিজের ফোন থেকে ছবি বেছে নাও। ছবিগুলো এই ব্রাউজার সেশনেই দেখাবে; অনলাইনে স্থায়ীভাবে রাখতে হলে ছবিগুলো ওয়েবসাইটের ফোল্ডারে যোগ করতে হবে।</p>
+    <div class="gallery">
+      <label class="photo"><span>📷<br>প্রথম স্মৃতি<br><small>ছবি যোগ করতে ট্যাপ করো</small></span><input type="file" accept="image/*" aria-label="প্রথম স্মৃতির ছবি যোগ করুন"></label>
+      <label class="photo"><span>🌷<br>সুন্দর মুহূর্ত<br><small>ছবি যোগ করতে ট্যাপ করো</small></span><input type="file" accept="image/*" aria-label="সুন্দর মুহূর্তের ছবি যোগ করুন"></label>
+      <label class="photo"><span>💞<br>আরও একটি স্মৃতি<br><small>ছবি যোগ করতে ট্যাপ করো</small></span><input type="file" accept="image/*" aria-label="আরও একটি ছবি যোগ করুন"></label>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>বিশেষ দিনের কাউন্টডাউন ⏳</h2>
+    <p>নিচে একটি বিশেষ তারিখ বেছে নাও—সেই দিন পর্যন্ত কত সময় বাকি, তা এখানে দেখাবে।</p>
+    <label for="specialDate">বিশেষ তারিখ বেছে নাও:</label><br><br>
+    <input type="date" id="specialDate">
+    <div class="countdown" aria-live="polite">
+      <div class="timebox"><strong id="days">--</strong><small>দিন</small></div>
+      <div class="timebox"><strong id="hours">--</strong><small>ঘণ্টা</small></div>
+      <div class="timebox"><strong id="minutes">--</strong><small>মিনিট</small></div>
+      <div class="timebox"><strong id="seconds">--</strong><small>সেকেন্ড</small></div>
+    </div>
+    <p id="countdownNote">তারিখ বেছে নিলে কাউন্টডাউন শুরু হবে।</p>
+  </section>
+
+  <section class="section">
+    <h2>তোমার জন্য গোপন কথা 🔐</h2>
+    <p>একটু কাছে এসে নিচের বাটনে ট্যাপ করো…</p>
+    <button class="btn primary" id="secretBtn">গোপন মেসেজ খুলে দেখো 💝</button>
+    <div class="secret" id="secretText">তুমি যেমন, ঠিক তেমনভাবেই সুন্দর। তোমার স্বপ্নগুলো পূরণ হোক, তোমার দিনগুলো হাসিতে ভরে থাকুক। আর যদি কখনো মন খারাপ হয়, মনে রেখো—তোমার কথা শোনার মতো একজন মানুষ পৃথিবীতে আছেই। 🌸</div>
+  </section>
+</main>
+<div class="musicbar"><button id="musicBtn" aria-pressed="false">🎵 মিউজিক চালু</button></div>
+<footer>ভালোবাসা মানে যত্ন, সম্মান আর মন থেকে পাশে থাকা। 💗</footer>
+<script>
+const yesBtn=document.getElementById('yesBtn');
+const noBtn=document.getElementById('noBtn');
+const response=document.getElementById('response');
+yesBtn.addEventListener('click',()=>{
+  response.textContent='ইয়েই! 💖 তোমার উত্তরটা এই পেজে দেখা যাচ্ছে—এখন একটা সুন্দর স্মৃতি তৈরি হোক!';
+  document.getElementById('headline').textContent='আজকের দিনটা আরও সুন্দর! 💗';
+  burstHearts(18);
+});
+let noClicks=0;
+noBtn.addEventListener('click',()=>{
+  noClicks++;
+  const messages=['একদম সময় নাও—কোনো তাড়া নেই। 🌷','তোমার সিদ্ধান্তটাই গুরুত্বপূর্ণ। 💗','চাইলে পরে উত্তর দিতে পারো। 😊'];
+  response.textContent=messages[Math.min(noClicks-1,messages.length-1)];
+});
+document.getElementById('secretBtn').addEventListener('click',()=>{
+  const box=document.getElementById('secretText');
+  box.classList.toggle('show');
+  document.getElementById('secretBtn').textContent=box.classList.contains('show')?'গোপন মেসেজ বন্ধ করো 💌':'গোপন মেসেজ খুলে দেখো 💝';
+});
+document.querySelectorAll('.photo input').forEach(input=>{
+  input.addEventListener('change',event=>{
+    const file=event.target.files && event.target.files[0];
+    if(!file)return;
+    if(!file.type.startsWith('image/')){alert('অনুগ্রহ করে একটি ছবি বেছে নাও।');return;}
+    const label=input.closest('.photo');
+    let img=label.querySelector('img');
+    if(!img){img=document.createElement('img');label.appendChild(img);}
+    img.src=URL.createObjectURL(file);
+    const span=label.querySelector('span'); if(span)span.style.display='none';
+  });
+});
+// A gentle synthesized melody: no external audio file required. Browsers require a tap to start audio.
+let audioCtx=null, melodyTimer=null, noteIndex=0;
+const notes=[523.25,659.25,783.99,659.25,587.33,698.46,880,698.46];
+function playNote(){
+  if(!audioCtx)return;
+  const now=audioCtx.currentTime;
+  const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+  osc.type='sine'; osc.frequency.value=notes[noteIndex%notes.length];
+  gain.gain.setValueAtTime(0.0001,now);
+  gain.gain.exponentialRampToValueAtTime(0.055,now+.04);
+  gain.gain.exponentialRampToValueAtTime(0.0001,now+.42);
+  osc.connect(gain);gain.connect(audioCtx.destination);
+  osc.start(now);osc.stop(now+.45);noteIndex++;
+}
+const musicBtn=document.getElementById('musicBtn');
+musicBtn.addEventListener('click',async()=>{
+  if(melodyTimer){
+    clearInterval(melodyTimer);melodyTimer=null;
+    if(audioCtx)await audioCtx.suspend();
+    musicBtn.textContent='🎵 মিউজিক চালু';musicBtn.setAttribute('aria-pressed','false');
+  }else{
+    try{
+      audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+      await audioCtx.resume();playNote();melodyTimer=setInterval(playNote,520);
+      musicBtn.textContent='🔇 মিউজিক বন্ধ';musicBtn.setAttribute('aria-pressed','true');
+    }catch(e){musicBtn.textContent='মিউজিক চালু করা যায়নি';}
+  }
+});
+function spawnHeart(){
+  const h=document.createElement('span');h.className='float-heart';
+  h.textContent=['💗','💕','💖','🌸','💘'][Math.floor(Math.random()*5)];
+  h.style.left=Math.random()*100+'vw';h.style.fontSize=(16+Math.random()*22)+'px';
+  h.style.animationDuration=(6+Math.random()*5)+'s';document.body.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
+}
+setInterval(spawnHeart,850);
+function burstHearts(n){for(let i=0;i<n;i++)setTimeout(spawnHeart,i*80)}
+const dateInput=document.getElementById('specialDate');
+const dateKey='proposal-special-date';
+try{const saved=localStorage.getItem(dateKey);if(saved)dateInput.value=saved;}catch(e){}
+dateInput.addEventListener('change',()=>{
+  try{localStorage.setItem(dateKey,dateInput.value);}catch(e){}
+  updateCountdown();
+});
+function updateCountdown(){
+  const value=dateInput.value;
+  if(!value){['days','hours','minutes','seconds'].forEach(id=>document.getElementById(id).textContent='--');document.getElementById('countdownNote').textContent='তারিখ বেছে নিলে কাউন্টডাউন শুরু হবে।';return;}
+  const target=new Date(value+'T00:00:00').getTime(), now=Date.now(), diff=target-now;
+  if(diff<=0){['days','hours','minutes','seconds'].forEach(id=>document.getElementById(id).textContent='0');document.getElementById('countdownNote').textContent='দিনটি এসে গেছে, অথবা তারিখটি পেরিয়ে গেছে! 💗';return;}
+  const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+  document.getElementById('days').textContent=d;
+  document.getElementById('hours').textContent=h;
+  document.getElementById('minutes').textContent=m;
+  document.getElementById('seconds').textContent=s;
+  document.getElementById('countdownNote').textContent='সেই বিশেষ দিনটির জন্য আর অপেক্ষা… 💞';
+}
+updateCountdown();setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
